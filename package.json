@@ -1,0 +1,15 @@
+{
+  "name": "basico",
+  "version": "1.0.0",
+  "description": "Servidor Basico primera clase de node",
+  "main": "bucle_asincrono.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Guillermo Araujo",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^1.5.2",
+    "chance": "^1.0.1"
+  }
+}
