@@ -1,5 +1,4 @@
 'use strict';
-
 //Cargar libreria
 var fs = require("fs");
 
