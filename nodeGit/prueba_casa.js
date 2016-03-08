@@ -6,7 +6,8 @@
 
 //Cargar libreria
 var fs = require("fs");
-var textoChance,textoAsync;
+var async = require("async");
+var texto = "";
 
 var versionModulo = function(modulo, callbackNuestro){
 	fs.readFile("./node_modules/"+modulo+"/package.json", {encoding: "utf8"},function(err,data){
@@ -19,24 +20,15 @@ var versionModulo = function(modulo, callbackNuestro){
 		callbackNuestro(null,version);
 	});
 };
-
-versionModulo( "chance", function(err, str){
-	if (err){
-		console.error("Hubo un error: ", err);
-		return;	
+async.eachSeries(["chance","async"],
+	function cada(item, siguiente){
+		versionModulo( item, function(err,data){
+			console.log("item:",data);
+			texto +=	" " + data;	
+			console.log("texto: ", texto);
+			siguiente();
+		});
+	},function fin(err){
+		console.log("Fin",err);
 	}
-	console.log("La version del modulo es : ", str);
-	textoChance = str;
-	console.log("TextoChange ", textoChance);
-});
-versionModulo( "async", function(err, str){
-	if (err){
-		console.error("Hubo un error: ", err);
-		return;	
-	}
-	console.log("La version del modulo es : ", str);
-	textoAsync = str;
-	console.log("TextoAsync ", textoAsync);
-
-});
-
+);
